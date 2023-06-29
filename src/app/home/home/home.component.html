@@ -1,0 +1,22 @@
+<div class="bg-gray-300 min-h-full pb-4 py-8">
+  <h1 class="text-center text-5xl text-gray-600 pb-8">
+    Welcome to the <span class="text-orange-500">Shop</span>
+  </h1>
+  <div class="container m-auto flex flex-col justify-center">
+    <input
+      type="text"
+      placeholder="Search for a product by title..."
+      class="rounded-full bg-white w-full p-3 outline-orange-500 cursor-pointer transition-colors"
+    />
+    <div class="w-full drop-shadow-md bg-white rounded-md mt-2">
+      <ul>
+        <ng-container *ngFor="let product of products$ | async">
+          <li class="my-2 mx-4">
+            {{ product.title }}
+          </li>
+          <hr class="mx-3" />
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</div>
