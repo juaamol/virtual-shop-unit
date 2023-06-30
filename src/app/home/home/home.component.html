@@ -4,6 +4,7 @@
   </h1>
   <div class="container m-auto flex flex-col justify-center">
     <input
+      (input)="search($event)"
       type="text"
       placeholder="Search for a product by title..."
       class="rounded-full bg-white w-full p-3 outline-orange-500 cursor-pointer transition-colors"
