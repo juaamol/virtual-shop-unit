@@ -4,9 +4,7 @@ import { debounceTime, switchMap, share } from 'rxjs/operators';
 import { Product } from 'src/app/data/types/product';
 import { ShopService } from '../services/shop/shop.service';
 import { Router } from '@angular/router';
-
-const TYPING_DELAY_MS = 300;
-const MIN_QUERY_LENGTH = 3;
+import { environment } from 'src/environment';
 
 @Component({
   selector: 'app-home',
@@ -25,10 +23,10 @@ export class HomeComponent implements OnInit {
 
   findProducts() {
     return this.search$.pipe(
-      debounceTime(TYPING_DELAY_MS),
+      debounceTime(environment.typingDelayMs),
       switchMap((query: string) => {
         return iif(
-          () => query.length >= MIN_QUERY_LENGTH,
+          () => query.length >= environment.minQueryLength,
           this.shopService.getProductsByTitle(query),
           of<Product[]>([])
         );
