@@ -1,8 +1,8 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { BehaviorSubject, fromEvent, iif, of } from 'rxjs';
-import { debounceTime, map, switchMap } from 'rxjs/operators';
-import { productsDB } from 'src/app/data/products';
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, iif, of } from 'rxjs';
+import { debounceTime, switchMap, share } from 'rxjs/operators';
 import { Product } from 'src/app/data/types/product';
+import { ShopService } from '../services/shop/shop.service';
 
 const TYPING_DELAY_MS = 300;
 const MIN_QUERY_LENGTH = 3;
@@ -13,38 +13,33 @@ const MIN_QUERY_LENGTH = 3;
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  productsStore$ = new BehaviorSubject([]);
-  products$ = of<Product[]>([]);
+  private search$ = new BehaviorSubject('');
+  products$!: Observable<Product[]>;
+  inputVal = '99';
 
-  constructor(private inputRef: ElementRef) {}
+  constructor(private shopService: ShopService) {}
 
   ngOnInit() {
     this.searchProducts();
   }
 
   searchProducts() {
-    this.products$ = fromEvent<Event>(
-      this.inputRef.nativeElement,
-      'input'
-    ).pipe(
+    this.products$ = this.search$.pipe(
       debounceTime(TYPING_DELAY_MS),
-      map((event: Event) => (event.target as HTMLInputElement).value),
-      map((query) => query.toLowerCase()),
       switchMap((query: string) => {
         return iif(
           () => query.length >= MIN_QUERY_LENGTH,
-          this.getProductsByTitle$(query),
+          this.shopService.getProductsByTitle(query),
           of<Product[]>([])
         );
-      })
+      }),
+      share()
     );
   }
 
-  getProductsByTitle$(title: string) {
-    return of<Product[]>(
-      productsDB.filter((product) =>
-        product.title.toLowerCase().includes(title)
-      )
-    );
+  search(event: Event) {
+    const query = (event.target as HTMLInputElement).value;
+    this.search$.next(query);
+    this.inputVal = query;
   }
 }
