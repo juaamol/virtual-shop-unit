@@ -23,7 +23,7 @@
     formControlName="category"
     class="bg-white w-full p-3 mt-3 outline-orange-500 cursor-pointer transition-colors"
   >
-    <option disabled selected value="">Select an option</option>
+    <option value="" class="text-gray-400">Select an option</option>
     <ng-container *ngFor="let category of categories$ | async">
       <option [value]="category.id">{{ category.name }}</option>
     </ng-container>

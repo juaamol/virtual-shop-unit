@@ -20,7 +20,7 @@ import { Category } from 'src/app/data/types/category';
 })
 export class FiltersComponent implements OnInit, OnDestroy {
   private filtersSubscription!: Subscription;
-  @Output() filters = new EventEmitter<SearchFilters>();
+  @Output() filters = new EventEmitter<Partial<SearchFilters>>();
   formGroup!: FormGroup;
   categories$!: Observable<Category[]>;
 
@@ -62,8 +62,8 @@ export class FiltersComponent implements OnInit, OnDestroy {
 
     return {
       title,
-      minPrice: parseFloat(minPrice),
-      maxPrice: parseFloat(maxPrice),
+      minPrice: minPrice ? parseFloat(minPrice) : undefined,
+      maxPrice: maxPrice ? parseFloat(maxPrice) : undefined,
       category,
     };
   }
