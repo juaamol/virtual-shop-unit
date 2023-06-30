@@ -1,11 +1,12 @@
-<div class="bg-gray-300 min-h-full pb-4 py-8">
+<div class="bg-gray-300 min-h-full pb-4 py-8 px-4">
   <h1 class="text-center text-5xl text-gray-600 pb-8">
     Welcome to the <span class="text-orange-500">Shop</span>
   </h1>
   <div class="container m-auto flex flex-col justify-center">
     <input
       (input)="search($event)"
-      type="text"
+      (keyup.enter)="goToResults()"
+      type="search"
       placeholder="Search for a product by title..."
       class="rounded-full bg-white w-full p-3 outline-orange-500 cursor-pointer transition-colors"
     />
