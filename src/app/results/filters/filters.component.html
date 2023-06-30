@@ -1,0 +1,31 @@
+<form [formGroup]="formGroup">
+  <input
+    formControlName="title"
+    type="search"
+    placeholder="Search for a product by title..."
+    class="rounded-full bg-white w-full p-3 mb-3 outline-orange-500 cursor-pointer transition-colors"
+  />
+  <div class="flex justify-between">
+    <input
+      formControlName="minPrice"
+      type="number"
+      placeholder="0"
+      class="bg-white w-1/2 mr-1.5 p-3 outline-orange-500 cursor-pointer transition-colors"
+    />
+    <input
+      formControlName="maxPrice"
+      type="number"
+      placeholder="200"
+      class="bg-white w-1/2 ml-1.5 p-3 outline-orange-500 cursor-pointer transition-colors"
+    />
+  </div>
+  <select
+    formControlName="category"
+    class="bg-white w-full p-3 mt-3 outline-orange-500 cursor-pointer transition-colors"
+  >
+    <option disabled selected value="">Select an option</option>
+    <ng-container *ngFor="let category of categories$ | async">
+      <option [value]="category.id">{{ category.name }}</option>
+    </ng-container>
+  </select>
+</form>
