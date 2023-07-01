@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { ResultsModule } from './results/results.module';
+import { ProductModule } from './product/product.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +15,7 @@ import { ResultsModule } from './results/results.module';
     HttpClientModule,
     HomeModule,
     ResultsModule,
+    ProductModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
