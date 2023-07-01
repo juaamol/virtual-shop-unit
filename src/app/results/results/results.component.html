@@ -20,24 +20,26 @@
   <ul class="flex flex-wrap">
     <li
       *ngFor="let product of products$ | async"
-      class="w-full sm:w-80 bg-gray-100 drop-shadow-md mr-3 p-4 mb-3 flex"
+      class="w-full sm:w-80 bg-gray-100 drop-shadow-md mr-3 mb-3 flex"
     >
-      <ul class="flex flex-col">
-        <li class="text-lg font-bold">{{ product.title }}</li>
+      <a class="flex p-4" [routerLink]="['/product', product.id]">
+        <ul class="flex flex-col">
+          <li class="text-lg font-bold">{{ product.title }}</li>
 
-        <li class="my-3">
-          <img
-            [src]="product.images[0]"
-            [alt]="product.title"
-            class="w-full h-full aspect-w-1 aspect-h-1"
-          />
-        </li>
-        <li>{{ product.description }}</li>
-        <li class="mt-2">
-          <span class="font-bold">Category: </span>{{ product.category.name }}
-        </li>
-        <li class="text-right text-2xl mt-auto">{{ product.price }} €</li>
-      </ul>
+          <li class="my-3">
+            <img
+              [src]="product.images[0]"
+              [alt]="product.title"
+              class="w-full aspect-square"
+            />
+          </li>
+          <li>{{ product.description }}</li>
+          <li class="mt-2">
+            <span class="font-bold">Category: </span>{{ product.category.name }}
+          </li>
+          <li class="text-right text-2xl mt-auto">{{ product.price }} €</li>
+        </ul>
+      </a>
     </li>
   </ul>
 </div>
