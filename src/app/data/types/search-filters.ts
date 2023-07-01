@@ -1,6 +1,6 @@
 export interface SearchFilters {
   title: string;
-  minPrice: number;
-  maxPrice: number;
+  price_min: number;
+  price_max: number;
   category: string;
 }
