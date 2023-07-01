@@ -69,7 +69,6 @@ describe('FiltersComponent', () => {
     tick(1000);
 
     expect(button).toBeTruthy();
-    console.log(button, component.formGroup.value);
     expect(component.search.emit).toHaveBeenCalledWith({
       title: 'hello',
       price_min: 0,
