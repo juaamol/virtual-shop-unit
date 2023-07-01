@@ -20,19 +20,19 @@ export class ShopService {
 
   getProducts(searchFilters: Partial<SearchFilters>) {
     const url = environment.productsAPIUrl;
-    const { title, minPrice, maxPrice, category } = searchFilters;
+    const { title, price_min, price_max, category } = searchFilters;
     let params = new HttpParams();
 
     if (title) {
       params = params.append('title', title);
     }
 
-    if (minPrice || minPrice === 0) {
-      params = params.append('price_min', minPrice);
+    if (price_min || price_min === 0) {
+      params = params.append('price_min', price_min);
     }
 
-    if (maxPrice || maxPrice === 0) {
-      params = params.append('price_max', maxPrice);
+    if (price_max || price_max === 0) {
+      params = params.append('price_max', price_max);
     }
 
     if (category) {
