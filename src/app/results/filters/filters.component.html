@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup">
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
   <input
     formControlName="title"
     type="search"
@@ -7,13 +7,13 @@
   />
   <div class="flex justify-between">
     <input
-      formControlName="minPrice"
+      formControlName="price_min"
       type="number"
       placeholder="0"
       class="bg-white w-1/2 mr-1.5 p-3 outline-orange-500 cursor-pointer transition-colors"
     />
     <input
-      formControlName="maxPrice"
+      formControlName="price_max"
       type="number"
       placeholder="200"
       class="bg-white w-1/2 ml-1.5 p-3 outline-orange-500 cursor-pointer transition-colors"
@@ -21,11 +21,19 @@
   </div>
   <select
     formControlName="category"
-    class="bg-white w-full p-3 mt-3 outline-orange-500 cursor-pointer transition-colors"
+    class="bg-white w-full p-3 my-3 outline-orange-500 cursor-pointer transition-colors"
   >
-    <option value="" class="text-gray-400">Select an option</option>
+    <option selected value="" class="text-gray-400">Select an option</option>
     <ng-container *ngFor="let category of categories$ | async">
       <option [value]="category.id">{{ category.name }}</option>
     </ng-container>
   </select>
+  <div class="flex justify-end">
+    <button
+      type="submit"
+      class="rounded-full w-full sm:w-1/2 md:w-1/3 lg:w-auto bg-orange-500 hover:bg-orange-600 py-2 px-5 lg:px-10 text-white"
+    >
+      Search
+    </button>
+  </div>
 </form>

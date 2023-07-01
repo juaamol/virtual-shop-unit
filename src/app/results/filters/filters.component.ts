@@ -1,8 +1,11 @@
 import {
   Component,
   EventEmitter,
+  SimpleChanges,
   OnInit,
+  OnChanges,
   OnDestroy,
+  Input,
   Output,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
@@ -18,23 +21,40 @@ import { Category } from 'src/app/data/types/category';
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.scss'],
 })
-export class FiltersComponent implements OnInit, OnDestroy {
+export class FiltersComponent implements OnInit, OnChanges, OnDestroy {
   private filtersSubscription!: Subscription;
+  @Input() title?: string;
+  @Input() minPrice?: number;
+  @Input() maxPrice?: number;
+  @Input() category: string = '';
   @Output() filters = new EventEmitter<Partial<SearchFilters>>();
+  @Output() search = new EventEmitter<Partial<SearchFilters>>();
   formGroup!: FormGroup;
   categories$!: Observable<Category[]>;
 
   constructor(
     private formBuilder: FormBuilder,
     private shopService: ShopService
-  ) {}
+  ) {
+    this.formGroup = this.buildForm();
+  }
 
   ngOnInit() {
-    this.formGroup = this.buildForm();
     this.categories$ = this.shopService.getCategories();
     this.filtersSubscription = this.searchFilters().subscribe((filters) => {
       this.filters.emit(filters);
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['title'] ||
+      changes['minPrice'] ||
+      changes['maxPrice'] ||
+      changes['category']
+    ) {
+      this.patchFormValues();
+    }
   }
 
   ngOnDestroy(): void {
@@ -44,8 +64,8 @@ export class FiltersComponent implements OnInit, OnDestroy {
   buildForm() {
     return this.formBuilder.group({
       title: [''],
-      minPrice: ['', Validators.min(0)],
-      maxPrice: ['', Validators.min(0)],
+      price_min: ['', Validators.min(0)],
+      price_max: ['', Validators.min(0)],
       category: [''],
     });
   }
@@ -57,13 +77,27 @@ export class FiltersComponent implements OnInit, OnDestroy {
     );
   }
 
-  formatSearchFilters(filters: any) {
-    const { title, minPrice, maxPrice, category } = filters;
+  onSubmit() {
+    const filters = this.formatSearchFilters(this.formGroup.value);
+    this.search.emit(filters);
+  }
+
+  private patchFormValues(): void {
+    this.formGroup.patchValue({
+      title: this.title,
+      price_min: this.minPrice,
+      price_max: this.maxPrice,
+      category: this.category || '',
+    });
+  }
+
+  private formatSearchFilters(filters: any) {
+    const { title, price_min, price_max, category } = filters;
 
     return {
       title,
-      minPrice: minPrice ? parseFloat(minPrice) : undefined,
-      maxPrice: maxPrice ? parseFloat(maxPrice) : undefined,
+      price_min: price_min ? parseFloat(price_min) : undefined,
+      price_max: price_max ? parseFloat(price_max) : undefined,
       category,
     };
   }
