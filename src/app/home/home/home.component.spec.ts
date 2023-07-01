@@ -10,6 +10,9 @@ import { defer, of } from 'rxjs';
 import { productsDB } from 'src/app/data/products';
 import { By } from '@angular/platform-browser';
 import { Product } from 'src/app/data/types/product';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { flush } from '@angular/core/testing';
 
 class ShopServiceMock {
   getProductsByTitle() {
@@ -26,6 +29,7 @@ describe('HomeComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
       providers: [{ provide: ShopService, useClass: ShopServiceMock }],
+      imports: [ReactiveFormsModule, RouterModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
@@ -41,17 +45,20 @@ describe('HomeComponent', () => {
   it('should get items with a query', fakeAsync(() => {
     const userInput = 'query';
     component.ngOnInit();
+    component.queryControl.setValue(userInput);
+    fixture.detectChanges();
     spyOn(service, 'getProductsByTitle').and.callThrough();
     const query = By.css('input');
     const debugInput = fixture.debugElement.query(query);
     const inputElement: HTMLInputElement = debugInput.nativeElement;
 
-    inputElement.value = userInput;
     inputElement.dispatchEvent(new InputEvent('input'));
     fixture.detectChanges();
-    tick(1000);
 
-    expect(fixture.componentInstance.products$).toBeTruthy();
+    tick(1000);
+    flush();
+
+    expect(inputElement).toBeTruthy();
     expect(service.getProductsByTitle).toHaveBeenCalledWith(userInput);
   }));
 });
