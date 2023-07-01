@@ -70,16 +70,16 @@ export class FiltersComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  searchFilters() {
+  onSubmit() {
+    const filters = this.formatSearchFilters(this.formGroup.value);
+    this.search.emit(filters);
+  }
+
+  private searchFilters() {
     return this.formGroup.valueChanges.pipe(
       debounceTime(environment.typingDelayMs),
       map((filters) => this.formatSearchFilters(filters))
     );
-  }
-
-  onSubmit() {
-    const filters = this.formatSearchFilters(this.formGroup.value);
-    this.search.emit(filters);
   }
 
   private patchFormValues(): void {
