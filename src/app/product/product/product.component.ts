@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, switchMap, filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ShopService } from '../../home/services/shop/shop.service';
+import { Product } from 'src/app/data/types/product';
 
 @Component({
   selector: 'app-product',
@@ -10,14 +12,26 @@ import { Observable } from 'rxjs';
 })
 export class ProductComponent {
   id$!: Observable<string | null>;
+  product$!: Observable<Product>;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private shopService: ShopService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.id$ = this.idFromUrl();
+    this.idFromUrl();
+    this.getProduct();
   }
 
   idFromUrl() {
-    return this.route.paramMap.pipe(map((paramMap) => paramMap.get('id')));
+    this.id$ = this.route.paramMap.pipe(map((paramMap) => paramMap.get('id')));
+  }
+
+  getProduct() {
+    this.product$ = this.id$.pipe(
+      filter((id) => id !== null),
+      switchMap((id) => this.shopService.getProduct(id!))
+    );
   }
 }
