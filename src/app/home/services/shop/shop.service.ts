@@ -11,6 +11,11 @@ import { Category } from 'src/app/data/types/category';
 export class ShopService {
   constructor(private httpClient: HttpClient) {}
 
+  getProduct(id: string) {
+    const url = `${environment.productsAPIUrl}${id}`;
+    return this.httpClient.get<Product>(url);
+  }
+
   getProductsByTitle(title: string) {
     const url = environment.productsAPIUrl;
     const params = new HttpParams().append('title', title);
