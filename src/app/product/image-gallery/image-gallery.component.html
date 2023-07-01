@@ -1,0 +1,6 @@
+<h2 class="text-xl mb-6">Image gallery</h2>
+<ul class="flex flex-wrap">
+  <li *ngFor="let image of images" class="w-1/2 sm:w-60">
+    <img [src]="image" [alt]="alt" class="w-full sm:aspect-square pr-2" />
+  </li>
+</ul>
