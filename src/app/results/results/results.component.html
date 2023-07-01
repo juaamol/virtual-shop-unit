@@ -4,7 +4,7 @@
   </h1>
   <div class="md:w-3/4 mx-auto lg:w-1/2" *ngIf="filters$ | async as params">
     <app-filters
-      (search)="search($event)"
+      (filtersOnce)="search($event)"
       [title]="params['title']"
       [minPrice]="params['price_min']"
       [maxPrice]="params['price_max']"

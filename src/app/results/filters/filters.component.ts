@@ -28,7 +28,7 @@ export class FiltersComponent implements OnInit, OnChanges, OnDestroy {
   @Input() maxPrice?: number;
   @Input() category: string = '';
   @Output() filters = new EventEmitter<Partial<SearchFilters>>();
-  @Output() search = new EventEmitter<Partial<SearchFilters>>();
+  @Output() filtersOnce = new EventEmitter<Partial<SearchFilters>>();
   formGroup!: FormGroup;
   categories$!: Observable<Category[]>;
 
@@ -72,7 +72,7 @@ export class FiltersComponent implements OnInit, OnChanges, OnDestroy {
 
   onSubmit() {
     const filters = this.formatSearchFilters(this.formGroup.value);
-    this.search.emit(filters);
+    this.filtersOnce.emit(filters);
   }
 
   private searchFilters() {

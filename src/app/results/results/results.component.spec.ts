@@ -6,12 +6,12 @@ import {
 } from '@angular/core/testing';
 
 import { ResultsComponent } from './results.component';
-import { BehaviorSubject, defer, of } from 'rxjs';
-import { ShopService } from 'src/app/home/services/shop/shop.service';
+import { defer, of } from 'rxjs';
 import { productsDB } from '../../data/products';
-import { Product } from 'src/app/data/types/product';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Product } from '../../data/types/product';
+import { ShopService } from '../../home/services/shop/shop.service';
 
 class ShopServiceMock {
   getProducts() {

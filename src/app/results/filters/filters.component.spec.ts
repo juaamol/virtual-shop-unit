@@ -11,8 +11,8 @@ import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { defer, of } from 'rxjs';
-import { ShopService } from 'src/app/home/services/shop/shop.service';
-import { Category } from 'src/app/data/types/category';
+import { Category } from '../../data/types/category';
+import { ShopService } from '../../home/services/shop/shop.service';
 
 class ShopServiceMock {
   getCategories() {
@@ -60,7 +60,7 @@ describe('FiltersComponent', () => {
     component.formGroup.patchValue(userInput);
     component.ngOnInit();
     fixture.detectChanges();
-    spyOn(component.search, 'emit').and.callThrough();
+    spyOn(component.filtersOnce, 'emit').and.callThrough();
     const query = By.css('form');
     const button = fixture.debugElement.query(query);
     button.triggerEventHandler('ngSubmit', null);
@@ -69,7 +69,7 @@ describe('FiltersComponent', () => {
     tick(1000);
 
     expect(button).toBeTruthy();
-    expect(component.search.emit).toHaveBeenCalledWith({
+    expect(component.filtersOnce.emit).toHaveBeenCalledWith({
       title: 'hello',
       price_min: 0,
       price_max: 100,
