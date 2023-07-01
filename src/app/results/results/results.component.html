@@ -2,7 +2,7 @@
   <h1 class="text-center text-5xl text-gray-600 pb-8">
     Search <span class="text-orange-500">results</span>
   </h1>
-  <div class="md:w-3/4 mx-auto lg:w-1/2" *ngIf="queryParams$ | async as params">
+  <div class="md:w-3/4 mx-auto lg:w-1/2" *ngIf="filters$ | async as params">
     <app-filters
       (search)="search($event)"
       [title]="params['title']"

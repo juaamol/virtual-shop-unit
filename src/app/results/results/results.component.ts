@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
 })
 export class ResultsComponent {
   products$!: Observable<Product[]>;
-  queryParams$!: Observable<Params>;
+  filters$!: Observable<Params>;
 
   constructor(
     private shopService: ShopService,
@@ -22,7 +22,7 @@ export class ResultsComponent {
   ) {}
 
   ngOnInit() {
-    this.queryParams$ = this.queryParams();
+    this.filters$ = this.filters();
     this.products$ = this.findProducts();
   }
 
@@ -34,14 +34,14 @@ export class ResultsComponent {
   }
 
   private findProducts() {
-    return this.queryParams$.pipe(
+    return this.filters$.pipe(
       switchMap((searchFilters: Partial<SearchFilters>) => {
         return this.shopService.getProducts(searchFilters);
       })
     );
   }
 
-  private queryParams() {
+  private filters() {
     return this.route.queryParams.pipe(
       map((params) => {
         const title = params['title'];
@@ -49,7 +49,12 @@ export class ResultsComponent {
         const price_min = params['price_min'];
         const price_max = params['price_max'];
 
-        return { title, category, price_min, price_max };
+        return {
+          title,
+          category,
+          price_min: price_min ? parseFloat(price_min) : undefined,
+          price_max: price_max ? parseFloat(price_max) : undefined,
+        };
       })
     );
   }
