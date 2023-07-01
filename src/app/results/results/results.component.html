@@ -1,0 +1,43 @@
+<div class="bg-gray-300 min-h-full pb-4 py-8 px-4">
+  <h1 class="text-center text-5xl text-gray-600 pb-8">
+    Search <span class="text-orange-500">results</span>
+  </h1>
+  <div class="md:w-3/4 mx-auto lg:w-1/2" *ngIf="queryParams$ | async as params">
+    <app-filters
+      (search)="search($event)"
+      [title]="params['title']"
+      [minPrice]="params['price_min']"
+      [maxPrice]="params['price_max']"
+      [category]="params['category']"
+    ></app-filters>
+  </div>
+  <h2 class="text-xl mt-8 mb-6">
+    These are the products that match your search:
+  </h2>
+  <p *ngIf="((products$ | async) || []).length === 0" class="text-center">
+    No products have been found. Please try with different criteria.
+  </p>
+  <ul class="flex flex-wrap">
+    <li
+      *ngFor="let product of products$ | async"
+      class="w-full sm:w-80 bg-gray-100 drop-shadow-md mr-3 p-4 mb-3 flex"
+    >
+      <ul class="flex flex-col">
+        <li class="text-lg font-bold">{{ product.title }}</li>
+
+        <li class="my-3">
+          <img
+            [src]="product.images[0]"
+            [alt]="product.title"
+            class="w-full h-full aspect-w-1 aspect-h-1"
+          />
+        </li>
+        <li>{{ product.description }}</li>
+        <li class="mt-2">
+          <span class="font-bold">Category: </span>{{ product.category.name }}
+        </li>
+        <li class="text-right text-2xl mt-auto">{{ product.price }} €</li>
+      </ul>
+    </li>
+  </ul>
+</div>
