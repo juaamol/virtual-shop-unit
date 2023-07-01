@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, iif, of } from 'rxjs';
-import { debounceTime, switchMap, share } from 'rxjs/operators';
+import { debounceTime, switchMap, share, filter, map } from 'rxjs/operators';
 import { Product } from 'src/app/data/types/product';
 import { ShopService } from '../services/shop/shop.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environment';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ import { environment } from 'src/environment';
 export class HomeComponent implements OnInit {
   private search$ = new BehaviorSubject('');
   products$!: Observable<Product[]>;
+  queryControl = new FormControl('');
 
   constructor(private shopService: ShopService, private router: Router) {}
 
@@ -22,7 +24,8 @@ export class HomeComponent implements OnInit {
   }
 
   findProducts() {
-    return this.search$.pipe(
+    return this.queryControl.valueChanges.pipe(
+      map((value: string | null) => (value === null ? '' : value)),
       debounceTime(environment.typingDelayMs),
       switchMap((query: string) => {
         return iif(
@@ -35,12 +38,20 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  search(event: Event) {
-    const query = (event.target as HTMLInputElement).value;
-    this.search$.next(query);
+  goToResults() {
+    const query = this.queryControl.value;
+
+    this.router.navigate(['/', 'search'], {
+      queryParams: { title: query },
+      queryParamsHandling: 'merge',
+    });
   }
 
-  goToResults(): void {
-    this.router.navigateByUrl('/search');
+  selectResult(title: string) {
+    this.queryControl.setValue(title);
+  }
+
+  trackByFn(_: number, product: Product): any {
+    return product.id;
   }
 }
