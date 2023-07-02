@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '../user/user.service';
 import { User } from 'src/app/data/types/User';
-import { filter } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -12,19 +12,16 @@ export class AuthService {
   constructor(private userService: UserService) {}
 
   login(email: string, password: string) {
-    return this.userService
-      .getUserByEmail(email)
-      .pipe(filter((user) => user !== undefined))
-      .subscribe({
-        next: (user) => {
-          if (user!.password === password) {
-            localStorage.setItem(this.userKey, JSON.stringify(user));
-          }
+    return this.userService.getUserByEmail(email).pipe(
+      filter((user) => user !== undefined),
+      tap((user) => {
+        if (user!.password === password) {
+          localStorage.setItem(this.userKey, JSON.stringify(user));
+        }
 
-          return user!.password === password;
-        },
-        error: () => false,
-      });
+        return user!.password === password;
+      })
+    );
   }
 
   logout(): void {
