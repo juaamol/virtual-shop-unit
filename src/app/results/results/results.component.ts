@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable, switchMap, share } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { Product } from 'src/app/data/types/product';
 import { SearchFilters } from 'src/app/data/types/search-filters';
 import { ShopService } from 'src/app/home/services/shop/shop.service';

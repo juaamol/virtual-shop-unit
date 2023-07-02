@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '../user/user.service';
-import { User } from 'src/app/data/types/User';
-import { filter, tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, shareReplay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environment';
 import { UserUpload } from '../../../data/types/user-upload';
+import { ReplaySubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private readonly accessTokenKey = 'accessToken';
+  private isLoggedIn$ = new ReplaySubject<boolean>(1);
+  loggedInChanges$: Observable<boolean>;
 
   constructor(
     private httpClient: HttpClient,
     private userService: UserService
-  ) {}
+  ) {
+    this.isLoggedIn();
+    this.loggedInChanges$ = this.isLoggedIn$
+      .asObservable()
+      .pipe(shareReplay(1));
+  }
 
   login(email: string, password: string) {
     const url = environment.loginAPIUrl;
@@ -24,14 +31,13 @@ export class AuthService {
       tap((response: any) => {
         const accessToken = response.access_token;
         localStorage.setItem(this.accessTokenKey, accessToken);
+        this.isLoggedIn$.next(true);
       })
     );
   }
 
   registerUser(user: UserUpload) {
-    return this.userService
-      .createUser(user)
-      .pipe(switchMap(({ email, password }) => this.login(email, password)));
+    return this.userService.createUser(user);
   }
 
   getProfile(accessToken: string) {
@@ -42,9 +48,13 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this.accessTokenKey);
+    this.isLoggedIn$.next(false);
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.accessTokenKey);
+    const isLoggedIn = !!localStorage.getItem(this.accessTokenKey);
+    this.isLoggedIn$.next(isLoggedIn);
+
+    return isLoggedIn;
   }
 }
