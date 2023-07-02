@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user/user.service';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -15,10 +15,9 @@ export class RegistrationComponent implements OnInit {
   errors: string[] = [];
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private formBuilder: FormBuilder,
-    private router: Router,
-    private changeDetectorRef: ChangeDetectorRef
+    private router: Router
   ) {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -40,7 +39,7 @@ export class RegistrationComponent implements OnInit {
     const password = this.formValue('password');
     const avatar = this.formValue('avatar');
 
-    this.userService.createUser({ name, email, password, avatar }).subscribe({
+    this.authService.registerUser({ name, email, password, avatar }).subscribe({
       next: () => {
         this.router.navigate(['']);
       },

@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RegistrationComponent } from './registration.component';
-import { UserService } from '../services/user/user.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../services/auth/auth.service';
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
@@ -12,7 +11,7 @@ describe('RegistrationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RegistrationComponent],
-      providers: [{ provide: UserService, useValue: {} }],
+      providers: [{ provide: AuthService, useValue: {} }],
       imports: [ReactiveFormsModule, RouterModule.forRoot([])],
     }).compileComponents();
 
