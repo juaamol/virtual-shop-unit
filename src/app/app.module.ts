@@ -7,9 +7,10 @@ import { HomeModule } from './home/home.module';
 import { ResultsModule } from './results/results.module';
 import { ProductModule } from './product/product.module';
 import { LoginModule } from './login/login.module';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
