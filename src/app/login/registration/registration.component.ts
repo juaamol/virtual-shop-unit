@@ -41,7 +41,7 @@ export class RegistrationComponent implements OnInit {
 
     this.authService.registerUser({ name, email, password, avatar }).subscribe({
       next: () => {
-        this.router.navigate(['']);
+        this.router.navigate(['/', 'login']);
       },
       error: (err) => {
         this.errors = err.error.message || [];

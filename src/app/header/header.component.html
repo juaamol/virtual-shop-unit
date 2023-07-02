@@ -5,11 +5,19 @@
   >
     logo_dev
   </a>
-  <button
+  <a
+    *ngIf="!(isLoggedIn$ | async)"
     class="rounded-md bg-orange-500 hover:bg-orange-600 py-1 px-5 lg:px-10 text-white"
     routerLink="login"
   >
     Login
+  </a>
+  <button
+    *ngIf="isLoggedIn$ | async"
+    class="rounded-md bg-orange-500 hover:bg-orange-600 py-1 px-5 lg:px-10 text-white"
+    (click)="logout()"
+  >
+    Logout
   </button>
   <span
     class="material-symbols-outlined ml-3 text-orange-500 bg-white p-1 rounded-full cursor-pointer"
