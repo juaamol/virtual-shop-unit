@@ -31,10 +31,12 @@ export class UserService {
     return this.http.post<User>(url, user);
   }
 
-  checkEmailAvailability(email: string) {
+  isEmailAvailable(email: string) {
     const url = environment.usersAPIUrl;
-    return this.http.post<{ isAvailable: boolean }>(`${url}/is-available`, {
-      email,
-    });
+    return this.http
+      .post<{ isAvailable: boolean }>(`${url}/is-available`, {
+        email,
+      })
+      .pipe(map((availability) => availability.isAvailable));
   }
 }

@@ -31,14 +31,10 @@ export class LoginComponent implements OnInit {
 
     const email = this.formValue('email');
     const password = this.formValue('password');
-    this.authService.login(email, password).subscribe((isLoggedIn) => {
-      if (isLoggedIn) {
-        this.goToHome();
-      }
-    });
+    this.authService.login(email, password).subscribe(() => this.goHome());
   }
 
-  goToHome() {
+  goHome() {
     this.router.navigate(['']);
   }
 
