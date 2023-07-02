@@ -4,6 +4,9 @@ import { Product } from 'src/app/data/types/product';
 import { environment } from 'src/environment';
 import { SearchFilters } from '../../../data/types/search-filters';
 import { Category } from 'src/app/data/types/category';
+import { Pagination } from 'src/app/data/types/pagination';
+
+const DEFAULT_PAGINATION: Pagination = { offset: 0, limit: 10 };
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +19,15 @@ export class ShopService {
     return this.httpClient.get<Product>(url);
   }
 
-  getProductsByTitle(title: string) {
+  getProductsByTitle(
+    title: string,
+    pagination: Pagination = DEFAULT_PAGINATION
+  ) {
     const url = environment.productsAPIUrl;
-    const params = new HttpParams().append('title', title);
+    let params = new HttpParams();
+    params = params.append('title', title);
+    params = params.append('offset', pagination.offset);
+    params = params.append('limit', pagination.limit);
 
     return this.httpClient.get<Product[]>(url, { params });
   }
