@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environment';
 import { User } from '../../../data/types/User';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
+import { FileService } from '../file/file.service';
+import { UserUpload } from 'src/app/data/types/user-upload';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private fileService: FileService) {}
 
   getUsers() {
     const url = environment.usersAPIUrl;
@@ -26,9 +28,13 @@ export class UserService {
     );
   }
 
-  createUser(user: User) {
+  createUser(user: UserUpload) {
     const url = environment.usersAPIUrl;
-    return this.http.post<User>(url, user);
+
+    return this.fileService.uploadFile(user.avatar).pipe(
+      map((file) => file.location),
+      switchMap((avatar) => this.http.post<User>(url, { ...user, avatar }))
+    );
   }
 
   isEmailAvailable(email: string) {
