@@ -2,38 +2,39 @@ import { Injectable } from '@angular/core';
 import { UserService } from '../user/user.service';
 import { User } from 'src/app/data/types/User';
 import { filter, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly userKey = 'currentUser';
+  private readonly accessTokenKey = 'accessToken';
 
-  constructor(private userService: UserService) {}
+  constructor(private httpClient: HttpClient) {}
 
   login(email: string, password: string) {
-    return this.userService.getUserByEmail(email).pipe(
-      filter((user) => user !== undefined),
-      tap((user) => {
-        if (user!.password === password) {
-          localStorage.setItem(this.userKey, JSON.stringify(user));
-        }
-
-        return user!.password === password;
+    const url = environment.loginAPIUrl;
+    const body = { email, password };
+    return this.httpClient.post(url, body).pipe(
+      tap((response: any) => {
+        const accessToken = response.access_token;
+        localStorage.setItem(this.accessTokenKey, accessToken);
       })
     );
   }
 
+  getProfile(accessToken: string) {
+    const url = environment.profileAPIUrl;
+    const headers = { Authorization: `Bearer ${accessToken}` };
+    return this.httpClient.get(url, { headers });
+  }
+
   logout(): void {
-    localStorage.removeItem(this.userKey);
+    localStorage.removeItem(this.accessTokenKey);
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.userKey);
-  }
-
-  getCurrentUser(): User | null {
-    const userString = localStorage.getItem(this.userKey);
-    return userString ? JSON.parse(userString) : null;
+    return !!localStorage.getItem(this.accessTokenKey);
   }
 }
