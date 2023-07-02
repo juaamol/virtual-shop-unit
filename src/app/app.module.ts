@@ -8,6 +8,7 @@ import { ResultsModule } from './results/results.module';
 import { ProductModule } from './product/product.module';
 import { LoginModule } from './login/login.module';
 import { HeaderComponent } from './header/header.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -19,6 +20,7 @@ import { HeaderComponent } from './header/header.component';
     ResultsModule,
     ProductModule,
     LoginModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -28,7 +28,8 @@
 
           <li class="my-3">
             <img
-              [src]="product.images[0]"
+              appLazyLoader
+              [attr.data-src]="product.images[0]"
               [alt]="product.title"
               class="w-full aspect-square"
             />
