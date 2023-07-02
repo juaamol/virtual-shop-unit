@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { ResultsModule } from './results/results.module';
 import { ProductModule } from './product/product.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { ProductModule } from './product/product.module';
     HomeModule,
     ResultsModule,
     ProductModule,
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
