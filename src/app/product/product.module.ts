@@ -2,16 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from './product/product.component';
 import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
-
-
+import { ProductRoutingModule } from './product-routing.module';
 
 @NgModule({
-  declarations: [
-    ProductComponent,
-    ImageGalleryComponent
-  ],
-  imports: [
-    CommonModule
-  ]
+  declarations: [ProductComponent, ImageGalleryComponent],
+  imports: [CommonModule, ProductRoutingModule],
 })
-export class ProductModule { }
+export class ProductModule {}
