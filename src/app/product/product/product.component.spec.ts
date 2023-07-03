@@ -11,6 +11,7 @@ import { defer, of } from 'rxjs';
 import { productsDB } from 'src/app/data/products';
 import { ShopService } from '../../home/services/shop/shop.service';
 import { Product } from '../../data/types/product';
+import { SharedModule } from '../../shared/shared.module';
 
 class ShopServiceMock {
   getProduct() {
@@ -41,6 +42,7 @@ describe('ProductComponent', () => {
         { provide: ShopService, useClass: ShopServiceMock },
         { provide: ActivatedRoute, useClass: MockActivatedRoute },
       ],
+      imports: [SharedModule],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 

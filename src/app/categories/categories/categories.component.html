@@ -1,0 +1,6 @@
+<div class="pb-4 py-8 px-4">
+  <h1 class="text-center text-5xl text-gray-600 pb-8">
+    Product <span class="text-orange-500">categories</span>
+  </h1>
+  <app-gallery [images]="(categories$ | async)!" />
+</div>

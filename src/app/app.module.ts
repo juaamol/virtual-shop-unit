@@ -9,7 +9,7 @@ import { ProductModule } from './product/product.module';
 import { LoginModule } from './login/login.module';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
-import { LoggedInGuard } from './shared/guards/logged-in/logged-in.guard';
+import { CategoriesModule } from './categories/categories.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -21,6 +21,7 @@ import { LoggedInGuard } from './shared/guards/logged-in/logged-in.guard';
     ResultsModule,
     ProductModule,
     LoginModule,
+    CategoriesModule,
     SharedModule,
   ],
   bootstrap: [AppComponent],
