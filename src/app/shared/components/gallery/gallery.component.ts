@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-gallery',
@@ -7,4 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class GalleryComponent {
   @Input() images: { image: string; name?: string }[] = [];
+  @Output() clickedImageIndex = new EventEmitter<number>();
+
+  imageClicked(index: number) {
+    this.clickedImageIndex.emit(index);
+  }
 }

@@ -19,6 +19,11 @@ export class ShopService {
     return this.httpClient.get<Product>(url);
   }
 
+  getCategory(id: string) {
+    const url = `${environment.categoriesAPIUrl}/${id}`;
+    return this.httpClient.get<Category>(url);
+  }
+
   getProductsByTitle(title: string, pagination = DEFAULT_PAGINATION) {
     return this.getProducts({ title }, pagination);
   }

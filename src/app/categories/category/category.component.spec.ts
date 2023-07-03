@@ -5,7 +5,7 @@ import { ShopService } from 'src/app/home/services/shop/shop.service';
 import { defer, of } from 'rxjs';
 import { Product } from '../../data/types/product';
 import { productsDB } from '../../data/products';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 class ShopServiceMock {
   getProductsByCategory() {
@@ -34,6 +34,7 @@ describe('CategoryComponent', () => {
       providers: [
         { provide: ShopService, useClass: ShopServiceMock },
         { provide: ActivatedRoute, useClass: MockActivatedRoute },
+        { provide: Router, useValue: {} },
       ],
     }).compileComponents();
 
