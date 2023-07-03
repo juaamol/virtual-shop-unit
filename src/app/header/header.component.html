@@ -5,16 +5,17 @@
   >
     logo_dev
   </a>
+  <a class="text-white underline" routerLink="/categories"> Categories </a>
   <a
     *ngIf="!(isLoggedIn$ | async)"
-    class="rounded-md bg-orange-500 hover:bg-orange-600 py-1 px-5 lg:px-10 text-white"
+    class="rounded-md bg-orange-500 hover:bg-orange-600 py-1 px-5 lg:px-10 ml-4 text-white"
     routerLink="login"
   >
     Login
   </a>
   <button
     *ngIf="isLoggedIn$ | async"
-    class="rounded-md bg-orange-500 hover:bg-orange-600 py-1 px-5 lg:px-10 text-white"
+    class="rounded-md bg-orange-500 hover:bg-orange-600 py-1 px-5 lg:px-10 ml-4 text-white"
     (click)="logout()"
   >
     Logout
