@@ -5,6 +5,7 @@ import { Category } from '../../data/types/category';
 import { categoriesDB } from '../../data/categories-db';
 import { ShopService } from '../../home/services/shop/shop.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Router } from '@angular/router';
 
 class ShopServiceMock {
   getCategories() {
@@ -19,7 +20,10 @@ describe('CategoriesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CategoriesComponent],
-      providers: [{ provide: ShopService, useClass: ShopServiceMock }],
+      providers: [
+        { provide: ShopService, useClass: ShopServiceMock },
+        { provide: Router, useValue: {} },
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 

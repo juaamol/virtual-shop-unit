@@ -2,5 +2,10 @@
   <h1 class="text-center text-5xl text-gray-600 pb-8">
     Product <span class="text-orange-500">categories</span>
   </h1>
-  <app-gallery [images]="(categories$ | async)!" />
+  <ng-container *ngIf="categories$ | async as categories">
+    <app-gallery
+      [images]="categories!"
+      (clickedImageIndex)="goToCategory(categories![$event].id)"
+    />
+  </ng-container>
 </div>
