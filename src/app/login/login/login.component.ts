@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  error = '';
 
   constructor(
     private authService: AuthService,
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
@@ -30,7 +31,12 @@ export class LoginComponent implements OnInit {
 
     const email = this.formValue('email');
     const password = this.formValue('password');
-    this.authService.login(email, password).subscribe(() => this.goHome());
+    this.authService.login(email, password).subscribe({
+      next: () => this.goHome(),
+      error: (error) => {
+        this.error = error.error.message;
+      },
+    });
   }
 
   goHome() {

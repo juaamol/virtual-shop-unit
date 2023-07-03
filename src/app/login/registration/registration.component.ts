@@ -10,7 +10,6 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class RegistrationComponent implements OnInit {
   registerForm!: FormGroup;
-  isEmailValid$!: Observable<boolean>;
   errors: string[] = [];
 
   constructor(
@@ -20,7 +19,7 @@ export class RegistrationComponent implements OnInit {
   ) {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       avatar: ['', Validators.required],
     });
