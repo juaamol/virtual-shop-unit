@@ -45,5 +45,10 @@
   <h2 class="text-xl mt-8 mb-6">
     Explore our <span class="text-orange-500">categories</span>
   </h2>
-  <app-gallery [images]="(categories$ | async)!" />
+  <ng-container *ngIf="categories$ | async as categories">
+    <app-gallery
+      [images]="categories!"
+      (clickedImageIndex)="goToCategory(categories![$event].id)"
+    />
+  </ng-container>
 </div>

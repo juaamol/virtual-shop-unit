@@ -49,6 +49,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  goToCategory(id: number) {
+    this.router.navigate(['categories', id]);
+  }
+
   selectResult(title: string) {
     this.queryControl.setValue(title);
   }
