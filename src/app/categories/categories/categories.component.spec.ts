@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CategoriesComponent } from './categories.component';
-import { CategoriesGalleryComponent } from '../categories-gallery/categories-gallery.component';
 import { defer, of } from 'rxjs';
 import { Category } from '../../data/types/category';
 import { categoriesDB } from '../../data/categories-db';
 import { ShopService } from '../../home/services/shop/shop.service';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 class ShopServiceMock {
   getCategories() {
@@ -18,8 +18,9 @@ describe('CategoriesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CategoriesComponent, CategoriesGalleryComponent],
+      declarations: [CategoriesComponent],
       providers: [{ provide: ShopService, useClass: ShopServiceMock }],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CategoriesComponent);

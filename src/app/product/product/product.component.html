@@ -33,10 +33,7 @@
         </ul>
       </div>
       <div class="mt-5">
-        <app-image-gallery
-          [images]="product.images || []"
-          [alt]="product.title"
-        ></app-image-gallery>
+        <app-gallery [images]="product.images | strToImg"></app-gallery>
       </div>
     </ng-container>
     <ng-template #productNotFound>
