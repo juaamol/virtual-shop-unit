@@ -1,1 +1,11 @@
-<p>categories-gallery works!</p>
+<ul class="flex flex-wrap">
+  <li *ngFor="let category of categories" class="w-1/2 sm:w-48 pr-2 pb-4">
+    <img
+      appLazyLoader
+      [attr.data-src]="category.image"
+      [alt]="category.name"
+      class="w-full aspect-square"
+    />
+    <p>{{ category.name }}</p>
+  </li>
+</ul>

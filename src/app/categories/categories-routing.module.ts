@@ -6,6 +6,12 @@ export const routes: Routes = [
   {
     path: '',
     component: CategoriesComponent,
+    children: [
+      {
+        path: ':id',
+        component: CategoriesComponent,
+      },
+    ],
   },
 ];
 
