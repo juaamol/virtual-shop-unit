@@ -1,11 +1,11 @@
 <h2 class="text-xl mb-6">Image gallery</h2>
 <ul class="flex flex-wrap">
-  <li *ngFor="let image of images" class="w-1/2 sm:w-60">
+  <li *ngFor="let image of images" class="w-1/2 sm:w-48 pr-2 pb-2">
     <img
       appLazyLoader
       [attr.data-src]="image"
       [alt]="alt"
-      class="w-full sm:aspect-square pr-2"
+      class="w-full sm:aspect-square"
     />
   </li>
 </ul>

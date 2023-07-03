@@ -1,1 +1,19 @@
-<p>categories works!</p>
+<div class="pb-4 py-8 px-4">
+  <h1 class="text-center text-5xl text-gray-600 pb-8">
+    Welcome to the <span class="text-orange-500">Shop</span>
+  </h1>
+  <ul class="flex flex-wrap">
+    <li
+      *ngFor="let category of categories$ | async"
+      class="w-1/2 sm:w-48 pr-2 pb-4"
+    >
+      <img
+        appLazyLoader
+        [attr.data-src]="category.image"
+        [alt]="category.name"
+        class="w-full sm:aspect-square"
+      />
+      <p>{{ category.name }}</p>
+    </li>
+  </ul>
+</div>

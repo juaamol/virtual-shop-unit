@@ -18,6 +18,11 @@ export const routes: Routes = [
       import('./login/login.module').then((m) => m.LoginModule),
     canLoad: [LoggedInGuard],
   },
+  {
+    path: 'categories',
+    loadChildren: () =>
+      import('./categories/categories.module').then((m) => m.CategoriesModule),
+  },
   { path: '**', redirectTo: '' },
 ];
 
