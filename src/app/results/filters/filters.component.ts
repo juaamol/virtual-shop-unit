@@ -19,7 +19,6 @@ import { Category } from 'src/app/data/types/category';
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
-  styleUrls: ['./filters.component.scss'],
 })
 export class FiltersComponent implements OnInit, OnChanges, OnDestroy {
   private filtersSubscription!: Subscription;

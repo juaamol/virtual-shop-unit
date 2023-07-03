@@ -11,7 +11,6 @@ import { Category } from 'src/app/data/types/category';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   categories$ = of<Category[]>([]);

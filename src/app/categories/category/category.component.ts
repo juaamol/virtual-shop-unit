@@ -24,7 +24,6 @@ import { Product } from 'src/app/data/types/product';
   standalone: true,
   imports: [CommonModule, SharedModule],
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent implements OnInit {
   id$!: Observable<string | null>;
