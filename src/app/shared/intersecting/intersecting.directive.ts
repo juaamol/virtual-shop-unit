@@ -14,7 +14,6 @@ export class IntersectingDirective {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           this.intersecting.emit();
-          this.observer.unobserve(entry.target);
         }
       });
     });

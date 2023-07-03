@@ -10,5 +10,6 @@
       [images]="products!"
       (clickedImageIndex)="goToProduct(products![$event].id)"
     />
+    <span appIntersecting (intersecting)="intersecting()"></span>
   </ng-container>
 </div>

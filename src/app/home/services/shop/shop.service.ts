@@ -6,7 +6,7 @@ import { SearchFilters } from '../../../data/types/search-filters';
 import { Category } from 'src/app/data/types/category';
 import { Pagination } from 'src/app/data/types/pagination';
 
-const DEFAULT_PAGINATION: Pagination = { offset: 0, limit: 10 };
+export const DEFAULT_PAGINATION: Pagination = { offset: 0, limit: 10 };
 
 @Injectable({
   providedIn: 'root',
