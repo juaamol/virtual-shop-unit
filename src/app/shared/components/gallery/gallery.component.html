@@ -1,0 +1,16 @@
+<ul class="flex flex-wrap">
+  <li
+    *ngFor="let image of images"
+    class="w-1/2 sm:w-48 pr-2"
+    [class.pb-4]="image.name"
+    [class.pb-2]="!image.name"
+  >
+    <img
+      appLazyLoader
+      [attr.data-src]="image.image"
+      [alt]="image.name"
+      class="w-full aspect-square"
+    />
+    <p *ngIf="image.name">{{ image.name }}</p>
+  </li>
+</ul>
