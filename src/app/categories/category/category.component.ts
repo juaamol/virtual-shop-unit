@@ -6,7 +6,14 @@ import {
 } from '../../home/services/shop/shop.service';
 import { of, Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map, switchMap, scan } from 'rxjs/operators';
+import {
+  filter,
+  map,
+  switchMap,
+  scan,
+  withLatestFrom,
+  tap,
+} from 'rxjs/operators';
 import { SharedModule } from '../../shared/shared.module';
 import { Category } from '../../data/types/category';
 import { Pagination } from 'src/app/data/types/pagination';
@@ -57,31 +64,20 @@ export class CategoryComponent implements OnInit {
   }
 
   private intersectionGetProducts() {
-    this.products$ = combineLatest([this.id$, this.lastElementVisible$]).pipe(
-      filter(([id]) => id !== null),
-      map(([id]) => ({ pagination: DEFAULT_PAGINATION, id: id! })),
-      scan(
-        (
-          acc: { pagination: Pagination; id: string },
-          currentPage: { pagination: Pagination; id: string }
-        ) => {
-          return {
-            pagination: {
-              offset: acc.pagination.offset + DEFAULT_PAGINATION.limit,
-              limit: DEFAULT_PAGINATION.limit,
-            },
-            id: currentPage.id,
-          };
-        },
-        { pagination: DEFAULT_PAGINATION, id: '' }
+    this.products$ = this.lastElementVisible$.pipe(
+      map(() => DEFAULT_PAGINATION),
+      scan((pagination) => {
+        return {
+          offset: pagination.offset + DEFAULT_PAGINATION.limit,
+          limit: DEFAULT_PAGINATION.limit,
+        };
+      }, DEFAULT_PAGINATION),
+      withLatestFrom(this.id$),
+      filter(([_, id]) => id !== null),
+      switchMap(([page, id]) =>
+        this.shopService.getProductsByCategory(id!, page)
       ),
-      switchMap((page) =>
-        this.shopService.getProductsByCategory(page.id, page.pagination)
-      ),
-      scan(
-        (acc: Product[], response: Product[]) => acc.concat(response),
-        new Array<Product>()
-      ),
+      scan((acc: Product[], response) => acc.concat(response), []),
       map((products) =>
         products.map((product) => ({
           id: product.id,
