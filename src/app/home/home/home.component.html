@@ -1,9 +1,10 @@
 <div class="pb-4 py-8 px-4">
   <h1 class="text-center text-5xl text-gray-600 pb-8">
-    Welcome to the <span class="text-orange-500">Shop</span>
+    Virtual <span class="text-orange-500">Shop</span>
   </h1>
   <div class="w-full m-auto md:w-3/4 lg:w-1/2 flex flex-col justify-center">
     <input
+      #search
       [formControl]="queryControl"
       (keyup.enter)="goToResults()"
       type="search"
@@ -33,7 +34,7 @@
       </ul>
     </div>
   </div>
-  <p class="w-full m-auto md:w-3/4 lg:w-1/2 text-center mt-20">
+  <p class="w-full m-auto md:w-3/4 lg:w-1/2 text-center mt-10">
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum libero
     voluptates, illo perspiciatis totam veritatis? Dolorem adipisci asperiores,
     odit sapiente quasi cupiditate voluptatem tempora ipsam suscipit

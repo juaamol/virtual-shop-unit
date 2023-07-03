@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable, iif, of } from 'rxjs';
 import { debounceTime, switchMap, share, filter, map } from 'rxjs/operators';
 import { Product } from 'src/app/data/types/product';
@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   categories$ = of<Category[]>([]);
   products$!: Observable<Product[]>;
   queryControl = new FormControl('');
+  @ViewChild('search') searchInput!: ElementRef<HTMLInputElement>;
 
   constructor(private shopService: ShopService, private router: Router) {}
 
@@ -55,6 +56,7 @@ export class HomeComponent implements OnInit {
 
   selectResult(title: string) {
     this.queryControl.setValue(title);
+    this.searchInput.nativeElement.focus();
   }
 
   trackByFn(_: number, product: Product): any {
