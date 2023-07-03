@@ -6,6 +6,7 @@ import { ShopService } from '../services/shop/shop.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environment';
 import { FormControl } from '@angular/forms';
+import { Category } from 'src/app/data/types/category';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  private search$ = new BehaviorSubject('');
+  categories$ = of<Category[]>([]);
   products$!: Observable<Product[]>;
   queryControl = new FormControl('');
 
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.products$ = this.findProducts();
+    this.categories$ = this.shopService.getCategories();
   }
 
   findProducts() {

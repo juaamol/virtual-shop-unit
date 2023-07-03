@@ -8,5 +8,6 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [CategoriesGalleryComponent, CategoriesComponent],
   imports: [CommonModule, ProductRoutingModule, SharedModule],
+  exports: [CategoriesGalleryComponent],
 })
 export class CategoriesModule {}

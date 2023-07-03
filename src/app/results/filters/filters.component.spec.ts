@@ -13,20 +13,11 @@ import { RouterModule } from '@angular/router';
 import { defer, of } from 'rxjs';
 import { Category } from '../../data/types/category';
 import { ShopService } from '../../home/services/shop/shop.service';
+import { categoriesDB } from '../../data/categories-db';
 
 class ShopServiceMock {
   getCategories() {
-    return defer(() =>
-      of<Category[]>([
-        {
-          id: 1,
-          name: 'Clothes',
-          image: 'https://api.lorem.space/image/fashion?w=640&h=480&r=4278',
-          creationAt: '',
-          updatedAt: 'string',
-        },
-      ])
-    );
+    return defer(() => of<Category[]>(categoriesDB));
   }
 }
 

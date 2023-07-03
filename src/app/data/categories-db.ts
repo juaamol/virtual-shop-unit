@@ -1,0 +1,9 @@
+export const categoriesDB = [
+  {
+    id: 1,
+    name: 'Clothes',
+    image: 'https://api.lorem.space/image/fashion?w=640&h=480&r=4278',
+    creationAt: '',
+    updatedAt: 'string',
+  },
+];
