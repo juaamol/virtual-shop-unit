@@ -19,23 +19,23 @@ export class ShopService {
     return this.httpClient.get<Product>(url);
   }
 
-  getProductsByTitle(
-    title: string,
-    pagination: Pagination = DEFAULT_PAGINATION
-  ) {
-    const url = environment.productsAPIUrl;
-    let params = new HttpParams();
-    params = params.append('title', title);
-    params = params.append('offset', pagination.offset);
-    params = params.append('limit', pagination.limit);
-
-    return this.httpClient.get<Product[]>(url, { params });
+  getProductsByTitle(title: string, pagination = DEFAULT_PAGINATION) {
+    return this.getProducts({ title }, pagination);
   }
 
-  getProducts(searchFilters: Partial<SearchFilters>) {
+  getProductsByCategory(category: string, pagination = DEFAULT_PAGINATION) {
+    return this.getProducts({ category }, pagination);
+  }
+
+  getProducts(searchFilters: Partial<SearchFilters>, pagination?: Pagination) {
     const url = environment.productsAPIUrl;
     const { title, price_min, price_max, category } = searchFilters;
     let params = new HttpParams();
+
+    if (pagination) {
+      params = params.append('offset', pagination.offset);
+      params = params.append('limit', pagination.limit);
+    }
 
     if (title) {
       params = params.append('title', title);
