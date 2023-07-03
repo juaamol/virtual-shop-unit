@@ -1,4 +1,6 @@
-# VirtualShopUnit
+# Virtual Shop Unit
+
+![image](https://github.com/juaamol/virtual-shop-unit/assets/50924448/f832a432-7aa3-4d8b-89fd-d8441852b6d8)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.9.
 
