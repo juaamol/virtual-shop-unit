@@ -5,6 +5,9 @@
       {{ category.name }}
     </span>
   </h1>
+  <p *ngIf="((products$ | async) || []).length === 0" class="text-center">
+    No products have been found. Please try a different category.
+  </p>
   <ng-container *ngIf="products$ | async as products">
     <app-gallery
       [images]="products!"
