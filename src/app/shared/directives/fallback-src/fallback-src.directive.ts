@@ -5,9 +5,13 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 })
 export class FallbackSrcDirective {
   @Input() appFallbackSrc = '';
+  hasBeenTriggered = false;
 
   @HostListener('error') onError() {
-    this.replaceSrc();
+    if (!this.hasBeenTriggered) {
+      this.replaceSrc();
+      this.hasBeenTriggered = true;
+    }
   }
 
   constructor(private elementRef: ElementRef) {}
