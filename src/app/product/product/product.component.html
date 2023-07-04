@@ -7,6 +7,7 @@
     <ng-container *ngIf="product$ | async as product; else productNotFound">
       <div class="flex flex-col md:flex-row">
         <img
+          appFallbackSrc="/assets/images/image-error.jpg"
           [src]="product.images[0]"
           [alt]="product.title"
           class="w-full sm:w-80 mr-2.5 aspect-square"
