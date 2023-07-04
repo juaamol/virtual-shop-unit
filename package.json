@@ -7,6 +7,7 @@
     "build": "ng build",
     "build:ci": "ng build --base-href \"/virtual-shop-unit/\"",
     "build:serve": "ng build && npx http-server -p 8080 -c-1 ./dist/virtual-shop-unit/",
+    "build:explore": "ng build --source-map && npx source-map-explorer ./dist/virtual-shop-unit/*.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -38,6 +39,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "postcss": "^8.4.24",
+    "source-map-explorer": "^2.5.3",
     "tailwindcss": "^3.3.2",
     "typescript": "~4.9.4"
   }
