@@ -7,12 +7,13 @@
     <ng-container *ngIf="product$ | async as product; else productNotFound">
       <div class="flex flex-col md:flex-row">
         <img
+          appFallbackSrc="/assets/images/image-error.jpg"
           [src]="product.images[0]"
           [alt]="product.title"
           class="w-full sm:w-80 mr-2.5 aspect-square"
         />
 
-        <ul class="ml-2.5 mt-3 md:mt-0">
+        <ul class="ml-2.5 mt-3 md:mt-0 grow">
           <li class="text-lg font-bold">{{ product.title }}</li>
 
           <li>{{ product.description }}</li>
