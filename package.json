@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:ci": "ng build --base-href \"/virtual-shop-unit/\"",
+    "build:serve": "ng build && npx http-server -p 8080 -c-1 ./dist/virtual-shop-unit/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

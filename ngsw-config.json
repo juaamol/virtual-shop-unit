@@ -26,5 +26,30 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-perform",
+      "urls": ["/api.escuelajs.co/api/v1/categories", "/picsum.photos/**"],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 100,
+        "maxAge": "3d",
+        "timeout": "10s"
+      }
+    },
+    {
+      "name": "api-fresh",
+      "urls": [
+        "/api.escuelajs.co/api/v1/products/**",
+        "/api.escuelajs.co/api/v1/categories/**"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "3d",
+        "timeout": "10s"
+      }
+    }
   ]
 }
