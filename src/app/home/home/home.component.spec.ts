@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router';
 import { flush } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Category } from '../../data/types/category';
-import { categoriesDB } from '../../data/categories-db';
+import { categoriesDB } from '../../test-data/categories-db';
 
 class ShopServiceMock {
   getProductsByTitle() {

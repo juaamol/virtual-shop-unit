@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 import { defer, of } from 'rxjs';
 import { Category } from '../../data/types/category';
 import { ShopService } from '../../home/services/shop/shop.service';
-import { categoriesDB } from '../../data/categories-db';
+import { categoriesDB } from '../../test-data/categories-db';
 
 class ShopServiceMock {
   getCategories() {
