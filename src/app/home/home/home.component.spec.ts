@@ -7,7 +7,7 @@ import {
 import { HomeComponent } from './home.component';
 import { ShopService } from '../services/shop/shop.service';
 import { defer, of } from 'rxjs';
-import { productsDB } from 'src/app/data/products';
+import { productsDB } from 'src/app/test-data/products';
 import { By } from '@angular/platform-browser';
 import { Product } from 'src/app/data/types/product';
 import { ReactiveFormsModule } from '@angular/forms';

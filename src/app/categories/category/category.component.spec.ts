@@ -4,7 +4,7 @@ import { CategoryComponent } from './category.component';
 import { ShopService } from 'src/app/home/services/shop/shop.service';
 import { defer, of } from 'rxjs';
 import { Product } from '../../data/types/product';
-import { productsDB } from '../../data/products';
+import { productsDB } from '../../test-data/products';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 class ShopServiceMock {
