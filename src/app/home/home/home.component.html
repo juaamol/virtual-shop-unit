@@ -1,6 +1,6 @@
 <div class="pb-4 py-8 px-4">
   <h1 class="text-center text-5xl text-gray-600 pb-8">
-    Virtual <span class="text-orange-500">Shop</span>
+    Virtual <span class="text-orange-600">Shop</span>
   </h1>
   <div class="w-full m-auto md:w-3/4 lg:w-1/2 flex flex-col justify-center">
     <input
@@ -9,7 +9,7 @@
       (keyup.enter)="goToResults()"
       type="search"
       placeholder="Search for a product by title..."
-      class="rounded-full bg-white w-full p-3 outline-orange-500 cursor-pointer transition-colors"
+      class="rounded-full bg-white w-full p-3 outline-orange-600 cursor-pointer transition-colors"
     />
     <div class="w-full relative mt-2">
       <ul class="w-full absolute drop-shadow-md bg-white rounded-md">
@@ -22,7 +22,7 @@
           "
         >
           <li
-            class="py-2 px-4 cursor-pointer hover:bg-orange-500 hover:text-white rounded-t-md"
+            class="py-2 px-4 cursor-pointer hover:bg-orange-600 hover:text-white rounded-t-md"
             [class.rounded-t-md]="first"
             [class.rounded-b-md]="last"
             (click)="selectResult(product.title)"
@@ -44,7 +44,7 @@
     earum, unde iure sit enim tenetur aspernatur?
   </p>
   <h2 class="text-xl mt-8 mb-6">
-    Explore our <span class="text-orange-500">categories</span>
+    Explore our <span class="text-orange-600">categories</span>
   </h2>
   <ng-container *ngIf="categories$ | async as categories">
     <app-gallery

@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -7,6 +7,7 @@ import { HomeModule } from './home/home.module';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from 'src/environment';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -17,7 +18,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     HomeModule,
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
+      enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],

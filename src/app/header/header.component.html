@@ -1,6 +1,6 @@
-<header class="flex p-2 bg-gray-400 items-center">
+<header class="flex p-2 bg-gray-600 items-center">
   <a
-    class="material-symbols-outlined mr-auto text-orange-500 text-3xl bg-white rounded-md px-1 cursor-pointer"
+    class="material-symbols-outlined mr-auto text-orange-600 text-3xl bg-white rounded-md px-1 cursor-pointer"
     routerLink=""
   >
     logo_dev
@@ -8,20 +8,20 @@
   <a class="text-white underline" routerLink="/categories"> Categories </a>
   <a
     *ngIf="!(isLoggedIn$ | async)"
-    class="rounded-full bg-orange-500 hover:bg-orange-600 py-1 px-5 lg:px-8 ml-4 text-white"
+    class="rounded-full bg-orange-600 hover:bg-orange-700 py-1 px-5 lg:px-8 ml-4 text-white"
     routerLink="login"
   >
     Login
   </a>
   <button
     *ngIf="isLoggedIn$ | async"
-    class="rounded-full bg-orange-500 hover:bg-orange-600 py-1 px-5 lg:px-8 ml-4 text-white"
+    class="rounded-full bg-orange-600 hover:bg-orange-700 py-1 px-5 lg:px-8 ml-4 text-white"
     (click)="logout()"
   >
     Logout
   </button>
   <span
-    class="material-symbols-outlined ml-3 text-orange-500 bg-white p-1 rounded-full cursor-pointer"
+    class="material-symbols-outlined ml-3 text-orange-600 bg-white p-1 rounded-full cursor-pointer"
   >
     account_circle
   </span>
