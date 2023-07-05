@@ -8,7 +8,7 @@ import { ProductComponent } from './product.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Params, ActivatedRoute, ParamMap } from '@angular/router';
 import { defer, of } from 'rxjs';
-import { productsDB } from 'src/app/data/products';
+import { productsDB } from 'src/app/test-data/products';
 import { ShopService } from '../../home/services/shop/shop.service';
 import { Product } from '../../data/types/product';
 import { SharedModule } from '../../shared/shared.module';

@@ -7,7 +7,7 @@ import {
 
 import { ResultsComponent } from './results.component';
 import { defer, of } from 'rxjs';
-import { productsDB } from '../../data/products';
+import { productsDB } from '../../test-data/products';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Product } from '../../data/types/product';

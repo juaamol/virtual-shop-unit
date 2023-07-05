@@ -7,7 +7,7 @@ import {
 import { HomeComponent } from './home.component';
 import { ShopService } from '../services/shop/shop.service';
 import { defer, of } from 'rxjs';
-import { productsDB } from 'src/app/data/products';
+import { productsDB } from 'src/app/test-data/products';
 import { By } from '@angular/platform-browser';
 import { Product } from 'src/app/data/types/product';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router';
 import { flush } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Category } from '../../data/types/category';
-import { categoriesDB } from '../../data/categories-db';
+import { categoriesDB } from '../../test-data/categories-db';
 
 class ShopServiceMock {
   getProductsByTitle() {

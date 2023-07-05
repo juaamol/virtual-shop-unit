@@ -33,8 +33,8 @@
       "urls": ["/api.escuelajs.co/api/v1/categories", "/picsum.photos/**"],
       "cacheConfig": {
         "strategy": "performance",
-        "maxSize": 100,
-        "maxAge": "3d",
+        "maxSize": 30,
+        "maxAge": "2d",
         "timeout": "10s"
       }
     },
@@ -46,8 +46,8 @@
       ],
       "cacheConfig": {
         "strategy": "freshness",
-        "maxSize": 100,
-        "maxAge": "3d",
+        "maxSize": 30,
+        "maxAge": "2d",
         "timeout": "10s"
       }
     }
