@@ -6,7 +6,12 @@ import { LoggedInGuard } from './shared/guards/logged-in/logged-in.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'search', component: ResultsComponent },
+  {
+    path: 'search',
+    component: ResultsComponent,
+    loadChildren: () =>
+      import('./results/results.module').then((m) => m.ResultsModule),
+  },
   {
     path: 'product/:id',
     loadChildren: () =>
