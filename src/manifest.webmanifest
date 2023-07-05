@@ -1,6 +1,6 @@
 {
-  "name": "virtual-shop-unit",
-  "short_name": "virtual-shop-unit",
+  "name": "Virtual shop unit",
+  "short_name": "Virtual shop",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
