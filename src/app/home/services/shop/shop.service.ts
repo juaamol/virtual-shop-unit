@@ -5,8 +5,10 @@ import { environment } from 'src/environment';
 import { SearchFilters } from '../../../data/types/search-filters';
 import { Category } from 'src/app/data/types/category';
 import { Pagination } from 'src/app/data/types/pagination';
+import { catchError, concatMap, from, map, of } from 'rxjs';
 
 export const DEFAULT_PAGINATION: Pagination = { offset: 0, limit: 10 };
+const ERROR_CATEGORY = 2;
 
 @Injectable({
   providedIn: 'root',
@@ -58,7 +60,34 @@ export class ShopService {
       params = params.append('categoryId', category);
     }
 
-    return this.httpClient.get<Product[]>(url, { params });
+    return this.httpClient.get<Product[]>(url, { params }).pipe(
+      concatMap((data) => {
+        const products = data.map<[Product, number]>((item, index) => [
+          item,
+          index,
+        ]);
+        const toFix = products.filter(
+          ([{ category }]) => category.id === ERROR_CATEGORY
+        );
+
+        return toFix.length === 0
+          ? of(data)
+          : from(toFix).pipe(
+              concatMap(([item, index]) =>
+                this.getProduct(item.category.id + '').pipe(
+                  catchError(() => of(item)),
+                  map((fix): [Product, number] => [fix, index])
+                )
+              ),
+              map(([fix, index]) => {
+                data[index].price = fix.price;
+
+                return data;
+              })
+            );
+      }),
+      catchError(() => of<Product[]>([]))
+    );
   }
 
   getCategories() {
