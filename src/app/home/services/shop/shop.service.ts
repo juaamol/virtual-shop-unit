@@ -34,7 +34,10 @@ export class ShopService {
     return this.getProducts({ category }, pagination);
   }
 
-  getProducts(searchFilters: Partial<SearchFilters>, pagination?: Pagination) {
+  getProducts(
+    searchFilters: Partial<SearchFilters>,
+    pagination: Pagination = DEFAULT_PAGINATION
+  ) {
     const url = environment.productsAPIUrl;
     const { title, price_min, price_max, category } = searchFilters;
     let params = new HttpParams();
